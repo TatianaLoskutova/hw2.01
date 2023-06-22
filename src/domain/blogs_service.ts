@@ -3,6 +3,7 @@ import {BlogViewModel} from '../models/blog/blogViewModel';
 import {BlogMongoDbType} from '../types';
 import {ObjectId} from 'mongodb';
 import {blogsRepository} from '../repositories/blogs_repository';
+import {blogQueryRepository} from '../repositories/blogs_query_repository';
 
 
 export const blogsService = {
@@ -16,6 +17,27 @@ export const blogsService = {
             isMembership: false
         }
         return await blogsRepository.addBlogToMongoDb(blogToMongoDb)
+    },
+
+    async updateBlog(id: string, data: BlogInputModel): Promise<boolean> {
+        if (!ObjectId.isValid(id)) {
+            return false
+        }
+        return  await blogsRepository.updateBlog(id, data)
+    },
+
+    async deleteBlogById(id: string): Promise<boolean> {
+        const blogToDelete = await blogQueryRepository.findBlogById(new ObjectId(id))
+
+        if (!blogToDelete) {
+            return false
+        }
+        return await blogsRepository.deleteBlogById(id)
+    },
+
+    async deleteAllBlogs(): Promise<boolean> {
+        return  await blogsRepository.deleteAllBlogs()
     }
+
 
 }
