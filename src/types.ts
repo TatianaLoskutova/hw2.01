@@ -1,4 +1,5 @@
 import {ObjectId} from 'mongodb'
+import {Request} from 'express';
 
 export type BlogMongoDbType = {
     _id: ObjectId
@@ -18,3 +19,10 @@ export type PostMongoDbType = {
     blogName: string
     createdAt: string
 }
+
+export type RequestWithBody<T> = Request<{},{},T>
+export type RequestWithQuery<T> = Request<{},{},{},T>
+export type RequestWithParamsAndQuery<T, B> = Request<T,{},{},B>
+export type RequestWithParams<T> = Request<T>
+export type RequestWithParamsAndBody<T, B> = Request<T, {}, B>
+
