@@ -22,10 +22,10 @@ export const usersQueryRepository = {
         if (searchLoginTerm || searchEmailTerm) {
             filter.$or = []
             if (searchLoginTerm) {
-                filter.$or.push({ login: { $regex: searchLoginTerm } })
+                filter.$or.push({ login: { $regex: searchLoginTerm, options: 'i' } })
             }
             if (searchEmailTerm) {
-                filter.$or.push({ email: { $regex: searchEmailTerm } })
+                filter.$or.push({ email: { $regex: searchEmailTerm, options: 'i' } })
             }
         }
 
