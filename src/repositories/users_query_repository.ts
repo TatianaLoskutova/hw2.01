@@ -21,10 +21,10 @@ export const usersQueryRepository = {
         if (searchLoginTerm || searchEmailTerm) {
             filter.$or = []
             if (searchLoginTerm) {
-                filter.$or.push({ login: { $regex: searchLoginTerm, options: 'i' } })
+                filter.$or.push({login: {$regex: searchLoginTerm, options: 'i'}})
             }
             if (searchEmailTerm) {
-                filter.$or.push({ email: { $regex: searchEmailTerm, options: 'i' } })
+                filter.$or.push({email: {$regex: searchEmailTerm, options: 'i'}})
             }
         }
 
@@ -45,8 +45,8 @@ export const usersQueryRepository = {
             totalCount: usersCount,
             items: makeUserMapping(paging)
         }
-},
-    async findUserById(_id: ObjectId): Promise<UserViewModel | null>  {
+    },
+    async findUserById(_id: ObjectId): Promise<UserViewModel | null> {
         const foundedUser = await usersCollection.findOne({_id})
 
         if (!foundedUser) {
@@ -58,11 +58,6 @@ export const usersQueryRepository = {
             email: foundedUser.email,
             createdAt: foundedUser.createdAt
         }
-    },
-
-    async findByLoginOrEmail(loginOrEmail: string) {
-        const user = await usersCollection.findOne({ $or: [ { email: loginOrEmail }, { login: loginOrEmail } ] })
-        return user
-    },
+    }
 }
 
