@@ -5,6 +5,7 @@ import {UserDbType} from '../types';
 import {usersRepository} from '../repositories/users_repository';
 import {UserInputModel} from '../models/users/userInputModel';
 import {LoginInputModel} from '../models/auth/loginInputModel';
+import {usersQueryRepository} from '../repositories/users_query_repository';
 
 export const usersService = {
     async createUser(inputData: UserInputModel): Promise<UserViewModel> {
@@ -21,6 +22,15 @@ export const usersService = {
             createdAt: new Date().toISOString()
         }
         return await usersRepository.addUserToDb(newUserDbType)
+    },
+
+    async deleteUserById(id: string): Promise<boolean> {
+        const userToDelete = await usersQueryRepository.findUserById(new ObjectId(id))
+
+        if (!userToDelete) {
+            return false
+        }
+        return await usersRepository.deleteUserById(id)
     },
 
     async checkCredentials(inputData: LoginInputModel) {

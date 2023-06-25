@@ -1,6 +1,7 @@
 import {UserDbType} from '../types';
 import {UserViewModel} from '../models/users/userViewModel';
 import {usersCollection} from '../db/db';
+import {ObjectId} from 'mongodb';
 
 
 export const usersRepository = {
@@ -16,6 +17,11 @@ export const usersRepository = {
     async findByLoginOrEmail(loginOrEmail: string) {
         const user = await usersCollection.findOne({ $or: [ { email: loginOrEmail }, { userName: loginOrEmail } ] })
         return user
-    }
+    },
+
+    async deleteUserById(id: string): Promise<boolean>{
+        const result = await usersCollection.deleteOne({_id: new ObjectId(id)})
+        return result.deletedCount === 1
+    },
 }
 
