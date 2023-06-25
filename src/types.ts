@@ -20,6 +20,15 @@ export type PostMongoDbType = {
     createdAt: string
 }
 
+export type UserDbType = {
+    _id: ObjectId
+    login: string
+    email: string
+    passwordHash: string
+    passwordSalt: string
+    createdAt: string
+}
+
 export type RequestWithBody<T> = Request<{},{},T>
 export type RequestWithQuery<T> = Request<{},{},{},T>
 export type RequestWithParamsAndQuery<T, B> = Request<T,{},{},B>

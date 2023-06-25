@@ -1,0 +1,21 @@
+import {UserDbType} from '../types';
+import {UserViewModel} from '../models/users/userViewModel';
+import {usersCollection} from '../db/db';
+
+
+export const usersRepository = {
+    async addUserToDb(addedUser: UserDbType): Promise<UserViewModel> {
+        const result = await usersCollection.insertOne(addedUser)
+        return {
+            id: result.insertedId.toString(),
+            login: addedUser.login,
+            email: addedUser.email,
+            createdAt: addedUser.createdAt
+        }
+    },
+    async findByLoginOrEmail(loginOrEmail: string) {
+        const user = await usersCollection.findOne({ $or: [ { email: loginOrEmail }, { userName: loginOrEmail } ] })
+        return user
+    }
+}
+

@@ -13,6 +13,7 @@ import {errorsValidation} from '../middlewares/errors_validation';
 import {PostInputModel} from '../models/post/postInputModel';
 import {postContentValidation, postShortDescription, postTitleValidation} from '../middlewares/posts_validators';
 import {postsService} from '../domain/posts_service';
+import {authorizationValidation} from '../middlewares/authorization_validation';
 
 export const blogsRouters = Router()
 
@@ -55,6 +56,7 @@ blogsRouters.get('/:id/posts', async (req: RequestWithParamsAndQuery<GetByIdPara
 })
 
 blogsRouters.post('/',
+    authorizationValidation,
     blogNameValidation,
     blogDescriptionValidation,
     blogWebsiteUrlValidation,
@@ -67,6 +69,7 @@ blogsRouters.post('/',
 })
 
 blogsRouters.post('/:id/posts',
+    authorizationValidation,
     postTitleValidation,
     postShortDescription,
     postContentValidation,
@@ -83,6 +86,7 @@ blogsRouters.post('/:id/posts',
     })
 
 blogsRouters.put('/:id',
+    authorizationValidation,
     blogNameValidation,
     blogDescriptionValidation,
     blogWebsiteUrlValidation,
@@ -98,6 +102,7 @@ blogsRouters.put('/:id',
 
 
 blogsRouters.delete('/:id',
+    authorizationValidation,
     async (req: RequestWithParams<GetByIdParam>, res: Response) => {
         const isDeleted = await blogsService.deleteBlogById(req.params.id)
         if (isDeleted) {

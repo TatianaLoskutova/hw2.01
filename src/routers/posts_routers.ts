@@ -8,6 +8,7 @@ import {ObjectId} from 'mongodb';
 import {postBlogIdValidation, postContentValidation, postShortDescription, postTitleValidation} from '../middlewares/posts_validators';
 import {PostInputModel} from '../models/post/postInputModel';
 import {postsService} from '../domain/posts_service';
+import {authorizationValidation} from '../middlewares/authorization_validation';
 
 
 export const postsRouters = Router()
@@ -36,6 +37,7 @@ postsRouters.get('/:id',
     })
 
 postsRouters.post('/',
+    authorizationValidation,
     postTitleValidation,
     postShortDescription,
     postContentValidation,
@@ -49,6 +51,7 @@ postsRouters.post('/',
     })
 
 postsRouters.put('/:id',
+    authorizationValidation,
     postTitleValidation,
     postShortDescription,
     postContentValidation,
@@ -64,6 +67,7 @@ postsRouters.put('/:id',
     })
 
 postsRouters.delete('/:id',
+    authorizationValidation,
     async (req: RequestWithParams<GetByIdParam>, res: Response) => {
         const isDeleted = await postsService.deletePostById(req.params.id)
         if (isDeleted) {
