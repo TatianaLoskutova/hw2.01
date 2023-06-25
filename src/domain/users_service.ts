@@ -34,15 +34,15 @@ export const usersService = {
         return await usersRepository.deleteUserById(id)
     },
 
-    // async checkCredentials(inputData: LoginInputModel) {
-    //     const user = await usersRepository.findByLoginOrEmail(inputData.loginOrEmail)
-    //     if (!user) return false
-    //     const passwordHash = await this._generateHash(inputData.password, user.passwordSalt)
-    //     if (user.passwordHash !== passwordHash) {
-    //         return false
-    //     }
-    //     return true
-    // },
+    async checkCredentials(inputData: LoginInputModel) {
+        const user = await usersRepository.findByLoginOrEmail(inputData.loginOrEmail)
+        if (!user) return false
+        const passwordHash = await this._generateHash(inputData.password, user.passwordSalt)
+        if (user.passwordHash !== passwordHash) {
+            return false
+        }
+        return true
+    },
 
     async _generateHash(password: string, salt: string) {
         const hash = await bcrypt.hash(password, salt)

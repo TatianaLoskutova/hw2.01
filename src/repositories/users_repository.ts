@@ -1,6 +1,6 @@
 import {UserDbType} from '../types';
 import {UserViewModel} from '../models/users/userViewModel';
-import {blogsCollection, usersCollection} from '../db/db';
+import {usersCollection} from '../db/db';
 import {ObjectId} from 'mongodb';
 
 

@@ -1,4 +1,4 @@
-import {blogsCollection, usersCollection} from '../db/db';
+import {usersCollection} from '../db/db';
 import {makeUserMapping, makeUserPagination} from '../helpers/functions';
 import {PaginatorUserViewModel} from '../models/users/userViewModelWithPagination';
 import {ObjectId} from 'mongodb';
