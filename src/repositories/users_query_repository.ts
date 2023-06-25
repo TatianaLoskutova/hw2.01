@@ -2,7 +2,6 @@ import {blogsCollection, usersCollection} from '../db/db';
 import {makeUserMapping, makeUserPagination} from '../helpers/functions';
 import {PaginatorUserViewModel} from '../models/users/userViewModelWithPagination';
 import {ObjectId} from 'mongodb';
-import {BlogViewModel} from '../models/blog/blogViewModel';
 import {UserViewModel} from '../models/users/userViewModel';
 
 
@@ -59,6 +58,11 @@ export const usersQueryRepository = {
             email: foundedUser.email,
             createdAt: foundedUser.createdAt
         }
-    }
+    },
+
+    async findByLoginOrEmail(loginOrEmail: string) {
+        const user = await usersCollection.findOne({ $or: [ { email: loginOrEmail }, { login: loginOrEmail } ] })
+        return user
+    },
 }
 
