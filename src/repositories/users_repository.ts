@@ -1,6 +1,6 @@
 import {UserDbType} from '../types';
 import {UserViewModel} from '../models/users/userViewModel';
-import {usersCollection} from '../db/db';
+import {blogsCollection, usersCollection} from '../db/db';
 import {ObjectId} from 'mongodb';
 
 
@@ -22,6 +22,11 @@ export const usersRepository = {
     async deleteUserById(id: string): Promise<boolean>{
         const result = await usersCollection.deleteOne({_id: new ObjectId(id)})
         return result.deletedCount === 1
+    },
+
+    async deleteAllUsers(): Promise<boolean> {
+        const result = await usersCollection.deleteMany({})
+        return result.acknowledged === true
     },
 }
 

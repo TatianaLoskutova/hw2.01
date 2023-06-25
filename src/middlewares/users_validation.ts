@@ -1,4 +1,5 @@
 import {body} from 'express-validator';
+import {usersService} from '../domain/users_service';
 
 
 export const loginValidation = body('login')

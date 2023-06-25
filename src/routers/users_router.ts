@@ -6,10 +6,7 @@ import {emailValidation, loginValidation, passwordValidation} from '../middlewar
 import {errorsValidation} from '../middlewares/errors_validation';
 import {UserQueryModel} from '../models/users/userQueryModel';
 import {usersQueryRepository} from '../repositories/users_query_repository';
-import {authorizationValidation} from '../middlewares/authorization_validation';
 import {GetByIdParam} from '../models/getById';
-import {blogsService} from '../domain/blogs_service';
-import {blogsRouters} from './blogs_routers';
 
 export const usersRouter = Router()
 

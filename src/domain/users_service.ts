@@ -6,6 +6,7 @@ import {usersRepository} from '../repositories/users_repository';
 import {UserInputModel} from '../models/users/userInputModel';
 import {LoginInputModel} from '../models/auth/loginInputModel';
 import {usersQueryRepository} from '../repositories/users_query_repository';
+import {blogsRepository} from '../repositories/blogs_repository';
 
 export const usersService = {
     async createUser(inputData: UserInputModel): Promise<UserViewModel> {
@@ -47,6 +48,10 @@ export const usersService = {
         const hash = await bcrypt.hash(password, salt)
         return hash
     },
+
+    async deleteAllUsers(): Promise<boolean> {
+        return  await usersRepository.deleteAllUsers()
+    }
 
 }
 

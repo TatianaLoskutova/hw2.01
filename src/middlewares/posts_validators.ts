@@ -18,3 +18,4 @@ export const postBlogIdValidation = body('blogId')
             throw new Error('Id is not exist');
         }
     })
+
