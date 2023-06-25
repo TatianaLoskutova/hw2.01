@@ -7,6 +7,7 @@ import {errorsValidation} from '../middlewares/errors_validation';
 import {UserQueryModel} from '../models/users/userQueryModel';
 import {usersQueryRepository} from '../repositories/users_query_repository';
 import {GetByIdParam} from '../models/getById';
+import {authorizationValidation} from '../middlewares/authorization_validation';
 
 export const usersRouter = Router()
 
@@ -42,9 +43,10 @@ usersRouter.post('/',
 })
 
 usersRouter.delete('/:id',
-    loginValidation,
-    passwordValidation,
-    emailValidation,
+    // loginValidation,
+    // passwordValidation,
+    // emailValidation,
+    authorizationValidation,
     errorsValidation,
     async (req: RequestWithParams<GetByIdParam>, res: Response) => {
         const isDeleted = await usersService.deleteUserById(req.params.id)
