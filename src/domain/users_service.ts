@@ -6,7 +6,7 @@ import {usersRepository} from '../repositories/users_repository';
 import {UserInputModel} from '../models/users/userInputModel';
 import {LoginInputModel} from '../models/auth/loginInputModel';
 import {usersQueryRepository} from '../repositories/users_query_repository';
-import {blogsRepository} from '../repositories/blogs_repository';
+
 
 export const usersService = {
     async createUser(inputData: UserInputModel): Promise<UserViewModel> {
@@ -34,15 +34,15 @@ export const usersService = {
         return await usersRepository.deleteUserById(id)
     },
 
-    async checkCredentials(inputData: LoginInputModel) {
-        const user = await usersRepository.findByLoginOrEmail(inputData.loginOrEmail)
-        if (!user) return false
-        const passwordHash = await this._generateHash(inputData.password, user.passwordSalt)
-        if (user.passwordHash !== passwordHash) {
-            return false
-        }
-        return true
-    },
+    // async checkCredentials(inputData: LoginInputModel) {
+    //     const user = await usersRepository.findByLoginOrEmail(inputData.loginOrEmail)
+    //     if (!user) return false
+    //     const passwordHash = await this._generateHash(inputData.password, user.passwordSalt)
+    //     if (user.passwordHash !== passwordHash) {
+    //         return false
+    //     }
+    //     return true
+    // },
 
     async _generateHash(password: string, salt: string) {
         const hash = await bcrypt.hash(password, salt)

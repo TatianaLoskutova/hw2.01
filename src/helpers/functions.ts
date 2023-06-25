@@ -1,5 +1,6 @@
 import {blogsCollection, postsCollection, usersCollection} from '../db/db';
 import {BlogMongoDbType, PostMongoDbType, UserDbType} from '../types';
+import bcrypt from 'bcrypt';
 
 
 export const makeBlogPagination = async (
@@ -82,4 +83,6 @@ export const makeUserMapping = (arr: UserDbType[]) => {
         }
     })
 }
+
+
 
