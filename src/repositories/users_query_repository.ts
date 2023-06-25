@@ -22,9 +22,9 @@ export const usersQueryRepository = {
         if (searchLoginTerm) {
             filter.login = {$regex: searchLoginTerm}
         }
-        if (searchEmailTerm) {
-            filter.email = {$regex: searchEmailTerm}
-        }
+        // if (searchEmailTerm) {
+        //     filter.email = {$regex: searchEmailTerm}
+        // }
         if (sortBy) {
             sortObj[sortBy] = -1
         }
