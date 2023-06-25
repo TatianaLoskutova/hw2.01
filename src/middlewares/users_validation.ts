@@ -1,6 +1,4 @@
 import {body} from 'express-validator';
-import {blogQueryRepository} from '../repositories/blogs_query_repository';
-import {ObjectId} from 'mongodb';
 
 
 export const loginValidation = body('login')
@@ -12,4 +10,4 @@ export const passwordValidation = body('password')
     .trim().isLength({min: 6, max: 20}).withMessage('Incorrect length')
 export const emailValidation = body('email')
     .isString().withMessage('Should be string')
-    .matches('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$\n').withMessage('Incorrect email')
+    .matches('^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').withMessage('Incorrect email')
