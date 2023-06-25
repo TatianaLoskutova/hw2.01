@@ -10,4 +10,5 @@ export const passwordValidation = body('password')
     .trim().isLength({min: 6, max: 20}).withMessage('Incorrect length')
 export const emailValidation = body('email')
     .isString().withMessage('Should be string')
-    .matches('^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').withMessage('Incorrect email')
+    .matches('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$').withMessage('Incorrect email')
+
