@@ -18,15 +18,13 @@ export const usersQueryRepository = {
         const filter: any = {}
         const sortObj: any = {}
 
-        if (searchLoginTerm || searchEmailTerm) {
-            filter.$or = []
-            if (searchLoginTerm) {
-                filter.$or.push({login: {$regex: searchLoginTerm, options: 'i'}})
+        if (searchLoginTerm) {
+                filter.login = { $regex: searchLoginTerm, $options: 'i' }
             }
-            if (searchEmailTerm) {
-                filter.$or.push({email: {$regex: searchEmailTerm, options: 'i'}})
-            }
+        if (searchEmailTerm) {
+            filter.email = { $regex: searchEmailTerm, $options: 'i' }
         }
+
 
         if (sortBy) {
             sortObj[sortBy] = -1
