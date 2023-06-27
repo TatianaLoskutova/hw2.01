@@ -29,9 +29,10 @@ usersRouter.get('/', async (req: RequestWithQuery<UserQueryModel>, res: Response
 })
 
 usersRouter.post('/',
-    loginValidation,
-    passwordValidation,
-    emailValidation,
+    // loginValidation,
+    // passwordValidation,
+    // emailValidation,
+    authorizationValidation,
     errorsValidation,
     async (req: RequestWithBody<UserInputModel>, res: Response) => {
     const newUser = await usersService.createUser(req.body)
