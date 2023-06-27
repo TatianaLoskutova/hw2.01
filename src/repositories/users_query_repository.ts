@@ -32,7 +32,7 @@ export const usersQueryRepository = {
         if (sortDirection === 'asc') {
             sortObj[sortBy] = 1
         }
-        const usersCount = await usersCollection.countDocuments(filter)
+        const usersCount = await usersCollection.countDocuments(filter.login, filter.email)
         const pagesCount = Math.ceil(usersCount / +pageSize)
         const paging = await makeUserPagination(filter, sortObj, pageNumber, pageSize)
 
