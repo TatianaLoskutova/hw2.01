@@ -65,7 +65,7 @@ export const makeUserPagination = async (
     pageSize: number
 ) => {
     return await usersCollection
-        .find(filter.login, filter.email)
+        .find(filter)
         .sort(sortObj)
         .skip(+pageNumber > 0 ? (+pageNumber - 1) * +pageSize: 0)
         .limit(+pageSize > 0 ? +pageSize : 0)
