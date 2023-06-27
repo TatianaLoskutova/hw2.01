@@ -18,12 +18,12 @@ export const usersQueryRepository = {
         const filter: any = {}
         const sortObj: any = {}
 
-        if (searchLoginTerm) {
+        if (searchLoginTerm || searchEmailTerm) {
                 filter.login = { $regex: searchLoginTerm, $options: 'i' }
+                filter.email = { $regex: searchEmailTerm, $options: 'i' }
             }
-        if (searchEmailTerm) {
-            filter.email = { $regex: searchEmailTerm, $options: 'i' }
-        }
+
+
 
 
         if (sortBy) {
@@ -32,7 +32,7 @@ export const usersQueryRepository = {
         if (sortDirection === 'asc') {
             sortObj[sortBy] = 1
         }
-        const usersCount = await usersCollection.countDocuments(filter.login, filter.email)
+        const usersCount = await usersCollection.countDocuments(filter)
         const pagesCount = Math.ceil(usersCount / +pageSize)
         const paging = await makeUserPagination(filter, sortObj, pageNumber, pageSize)
 
